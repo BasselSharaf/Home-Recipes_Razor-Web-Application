@@ -9,7 +9,6 @@ namespace Exercise_3.Pages.Recipes
         public IEnumerable<string> DetailedIngredients { get; set; }
         public IEnumerable<string> DetailedInstructions { get; set; }
         public IEnumerable<string> DetailedCategories { get; set; }
-
         public IConfiguration Config { get; set; }
         public DetailModel(IConfiguration config)
         {
