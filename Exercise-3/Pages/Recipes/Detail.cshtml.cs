@@ -18,7 +18,6 @@ namespace Exercise_3.Pages.Recipes
         public async Task OnGet(Guid id)
         {
             HttpClient client = new HttpClient();
-            Console.WriteLine(Config["url"] + id);
             var request = await client.GetFromJsonAsync<Recipe>(Config["url"]+"recipes/"+id);
             if (request is not null)
             {
