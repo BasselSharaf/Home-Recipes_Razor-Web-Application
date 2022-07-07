@@ -16,17 +16,20 @@
                 <td>@foreach(var ingredient in Model.DetailedIngredients)
                 {
                     @ingredient<br>
-                }</td>
+                }
+                </td>
                 <td>
                 @foreach(var instruction in Model.DetailedInstructions)
                 {
                     @instruction<br>
                 }
                 </td>
-            <td>@foreach(var category in Model.DetailedCategories)
+                <td>
+                @foreach(var category in Model.DetailedCategories)
                 {
                     @category<br>
-                }</td>              
+                }
+                </td>              
             </tr>
     </table>
     <a asp-page="../Index" class="btn btn-primary">All Recipes</a>
