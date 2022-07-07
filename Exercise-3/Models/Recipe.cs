@@ -8,7 +8,6 @@
 
     public Recipe(string title, string ingredients, string instructions, List<String> categories)
     {
-        Id = Guid.NewGuid();
         Title = title;
         Ingredients = ingredients;
         Instructions = instructions;

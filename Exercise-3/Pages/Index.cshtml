@@ -9,6 +9,7 @@
     <h1 class="display-4">Welcome</h1>
     <p>This is my Recipes Web Application</p>
 </div>
+
 <div>
     <table class="table">
         <tr>
@@ -22,13 +23,13 @@
         {
             <tr>
                 <td>@recipe.Title</td>
-                <td>@recipe.Ingredients.Substring(0,@recipe.Ingredients.Length%10)...</td>
-                <td>@recipe.Instructions.Substring(0,@recipe.Instructions.Length%10)...</td>
+                <td>@recipe.Ingredients.Substring(0,@recipe.Ingredients.Length%10+4)...</td>
+                <td>@recipe.Instructions.Substring(0,@recipe.Instructions.Length%10+4)...</td>
                 <td>@String.Join(", ",recipe.Categories)...</td>
                 <td>
                 <a class="btn btn-lg" 
-                    asp-page="./Detail" 
-                    asp-route-restaurantId="@recipe.Id">
+                    asp-page="./Recipes/Detail" 
+                    asp-route-id="@recipe.Id">
                     <i class="glyphicon glyphicon-zoom-in"></i>
                 </a>
             </td>
