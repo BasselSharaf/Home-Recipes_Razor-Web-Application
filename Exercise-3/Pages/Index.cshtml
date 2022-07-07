@@ -4,7 +4,35 @@
     ViewData["Title"] = "Home page";
 }
 
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <p>This is my Recipes Web Application</p>
+</div>
+<div>
+    <table class="table">
+        <tr>
+            <th>Title</th>
+            <th>Ingredients</th>
+            <th>Instructions</th>
+            <th>Categories</th>
+            <th>Actions</th>
+        </tr>
+        @foreach(Recipe recipe in Model.Recipes)
+        {
+            <tr>
+                <td>@recipe.Title</td>
+                <td>@recipe.Ingredients.Substring(0,@recipe.Ingredients.Length%10)...</td>
+                <td>@recipe.Instructions.Substring(0,@recipe.Instructions.Length%10)...</td>
+                <td>@String.Join(", ",recipe.Categories)...</td>
+                <td>
+                <a class="btn btn-lg" 
+                    asp-page="./Detail" 
+                    asp-route-restaurantId="@recipe.Id">
+                    <i class="glyphicon glyphicon-zoom-in"></i>
+                </a>
+            </td>
+            </tr>
+        }
+    </table>
 </div>
