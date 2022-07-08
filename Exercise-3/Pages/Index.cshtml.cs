@@ -16,7 +16,7 @@ namespace Exercise_3.Pages
             _logger = logger;
         }
 
-        public async Task OnGet()
+        public async Task OnGetAsync()
         {
             var fetchRecipes = await s_httpClient.GetFromJsonAsync<List<Recipe>>(s_config["url"]+"recipes");
             if (fetchRecipes is not null)
