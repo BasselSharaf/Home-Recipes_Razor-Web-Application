@@ -1,4 +1,48 @@
 ﻿@page
 @model Exercise_3.Pages.Recipes.CreateModel
 @{
+    ViewData["Title"] = "Create";
+}
+<h1>Create</h1>
+
+<h4>Recipe</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Recipe.Title" class="control-label"></label>
+                <input asp-for="Recipe.Title" class="form-control" />
+                <span asp-validation-for="Recipe.Title" class="text-danger" ></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Recipe.Ingredients" class="control-label"></label>
+                <textarea asp-for="Recipe.Ingredients" class="form-control" rows="4" cols="60" placeholder = "Enter different ingredients on seperate lines."></textarea> 
+                <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Recipe.Instructions" class="control-label"></label>
+                <textarea asp-for="Recipe.Instructions" class="form-control" rows="4" cols="50" placeholder = "Enter different instructions on seperate lines."></textarea>
+                <span asp-validation-for="Recipe.Instructions" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Categories" class="control-label"></label>
+                <textarea asp-for="Categories" id="input-categories" class="form-control" rows="4" cols="50" placeholder = "Enter different categories on seperate lines."></textarea>   
+                <span asp-validation-for="Categories" class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to Recipes</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
