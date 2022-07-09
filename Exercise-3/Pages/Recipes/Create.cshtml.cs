@@ -8,7 +8,6 @@ namespace Exercise_3.Pages.Recipes
         ILogger<CreateModel> logger;
         public readonly IConfiguration Config;
         public Recipe? Recipe { get; set; }
-        public string Categories { get; set; } = "";
         public CreateModel(IConfiguration config, ILogger<CreateModel> logger)
         {
             Config = config;
@@ -23,12 +22,7 @@ namespace Exercise_3.Pages.Recipes
         public async Task<IActionResult> OnPostAsync()
         {
             if(!ModelState.IsValid || Recipe == null)
-            {
-                Console.WriteLine(Categories);
-                return RedirectToPage("./Index");
-            }
-            
-            this.Recipe.Categories = Categories.Split("\n").ToList<string>();
+                return Page();
             HttpClient client = new HttpClient();
             var request = await client.PostAsJsonAsync<Recipe>(Config["url"]+"recipes",Recipe);
             return RedirectToPage("./Index");
