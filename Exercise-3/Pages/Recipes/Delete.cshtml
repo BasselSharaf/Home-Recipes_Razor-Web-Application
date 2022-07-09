@@ -2,3 +2,22 @@
 @model Exercise_3.Pages.Recipes.DeleteModel
 @{
 }
+h1>Delete</h1>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Movie</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            Hello
+        </dt>
+        
+    </dl>
+    
+    <form method="post">
+        <input type="hidden" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-page="./Index">Back to List</a>
+    </form>
+</div>

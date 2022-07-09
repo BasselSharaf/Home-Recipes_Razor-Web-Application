@@ -29,6 +29,16 @@
                     asp-route-id="@recipe.Id">
                     <i class="glyphicon glyphicon-zoom-in"></i>
                 </a>
+                <a class="btn btn-lg" 
+                    asp-page="./Recipes/Edit" 
+                    asp-route-id="@recipe.Id">
+                    <i class="glyphicon glyphicon-pencil"></i>
+                </a>
+                <a class="btn btn-lg" 
+                    asp-page="./Recipes/Delete" 
+                    asp-route-id="@recipe.Id">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </a>
             </td>
             </tr>
         }
