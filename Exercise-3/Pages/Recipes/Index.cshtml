@@ -20,8 +20,8 @@
         {
             <tr>
                 <td>@recipe.Title</td>
-                <td>@recipe.Ingredients.Substring(0,@recipe.Ingredients.Length%10+4)...</td>
-                <td>@recipe.Instructions.Substring(0,@recipe.Instructions.Length%10+4)...</td>
+                <td>@recipe.Ingredients.Substring(0,@recipe.Ingredients.Length%10)...</td>
+                <td>@recipe.Instructions.Substring(0,@recipe.Instructions.Length%10)...</td>
                 <td>@String.Join(", ",recipe.Categories)...</td>
                 <td>
                 <a class="btn btn-lg" 

@@ -18,7 +18,6 @@ namespace Exercise_3.Pages.Recipes
 
         public async Task OnGetAsync()
         {
-            var url = Config["url"];
             var fetchRecipes = await s_httpClient.GetFromJsonAsync<List<Recipe>>(Config["url"] + "recipes");
             if (fetchRecipes is not null)
                 Recipes = fetchRecipes;

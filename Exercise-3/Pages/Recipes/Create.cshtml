@@ -18,18 +18,19 @@
             </div>
             <div class="form-group">
                 <label asp-for="Recipe.Ingredients" class="control-label"></label>
-                <textarea asp-for="Recipe.Ingredients" class="form-control" rows="4" cols="60" placeholder = "Enter different ingredients on seperate lines."></textarea> 
+                <textarea asp-for="Recipe.Ingredients" class="form-control" rows="4" cols="60" minlength="10" placeholder = "Enter different ingredients on seperate lines."></textarea> 
                 <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Recipe.Instructions" class="control-label"></label>
-                <textarea asp-for="Recipe.Instructions" class="form-control" rows="4" cols="50" placeholder = "Enter different instructions on seperate lines."></textarea>
+                <textarea asp-for="Recipe.Instructions" class="form-control" rows="4" cols="50" minlength="10" placeholder = "Enter different instructions on seperate lines."></textarea>
                 <span asp-validation-for="Recipe.Instructions" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Recipe.Categories" class="control-label"></label>
-                <textarea asp-for="Recipe.Categories" id="input-categories" class="form-control" rows="4" cols="50" placeholder = "Enter different categories on seperate lines."></textarea>   
-                <span asp-validation-for="Recipe.Categories" class="text-danger"></span>
+                <label asp-for="Categories" class="control-label"></label>
+                <br />
+                <select asp-for="Categories" asp-items="Model.Categories" multiple="multiple" class="multi-select" rows="4" cols="50"></select>   
+                <span asp-validation-for="Categories" class="text-danger"></span>
             </div>
             <br />
             <div class="form-group">
