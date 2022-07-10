@@ -96,7 +96,7 @@ class Data
 
     public List<string> GetAllCategories()
     {
-        return new List<string>();
+        return _categories;
     }
 
     public void AddCategory(string category)
@@ -122,19 +122,25 @@ class Data
     public void RemoveCategory(string category)
     {
         if (_categories.Contains(category))
+        {
             _categories.Remove(category);
+            _recipes.Where(r => r.Categories.Contains(category)).ToList().ForEach(r => r.Categories.Remove(category));
+        }
     }
 
-    public void AddCategoryToRecipe(Guid id, string newCategory)
+    public void AddCategoryToRecipe(Guid id, string category)
     {
-        var recipe = getRecipe(id);
-        recipe.Categories.Add(newCategory);
+        if (_categories.Contains(category))
+        {
+            var recipe = getRecipe(id);
+            recipe.Categories.Add(category);
+        }
     }
 
     public void RemoveCategoryFromRecipe(Guid id, string category)
     {
         var recipe = getRecipe(id);
-        recipe.Categories.RemoveAll(c => c == category);
+        recipe.Categories.Remove(category);
     }
 
     public void SaveData()
