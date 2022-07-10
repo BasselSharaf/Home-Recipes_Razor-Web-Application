@@ -1,29 +1,39 @@
 ﻿using System.Text.Json;
 class Data
 {
-    private List<Recipe> _recipes { get; set; }
-    private string _filePath;
+    private List<Recipe> _recipes { get; set; } = new();
+    private List<string> _categories { get; set; } = new();
+    private string _recipesFilePath;
+    private string _categoriesFilePath;
 
     public Data ()
     {
-        _recipes = new();
-        // This method creates a path where we have access to read and write data inside the ProgramData folder
         var systemPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
-        _filePath = Path.Combine(systemPath, "Recipes.json");
-        if (!File.Exists(this._filePath))
+        _recipesFilePath = Path.Combine(systemPath, "Recipes.json");
+        _categoriesFilePath = Path.Combine(systemPath, "Categories.json");
+        if (!File.Exists(this._recipesFilePath))
         {
             _recipes = new List<Recipe>();
-            File.WriteAllText(this._filePath, JsonSerializer.Serialize(_recipes));
+            File.WriteAllText(this._recipesFilePath, JsonSerializer.Serialize(_recipes));
         }
-        else
+        if (!File.Exists(this._categoriesFilePath))
         {
-            using (StreamReader r = new StreamReader(this._filePath))
-            {
-                var data = r.ReadToEnd();
-                var json = JsonSerializer.Deserialize<List<Recipe>>(data);
-                if (json != null)
-                    _recipes = json;
-            }
+            _recipes = new List<Recipe>();
+            File.WriteAllText(this._categoriesFilePath, JsonSerializer.Serialize(_recipes));
+        }
+        using (StreamReader r = new StreamReader(this._recipesFilePath))
+        {
+            var data = r.ReadToEnd();
+            var json = JsonSerializer.Deserialize<List<Recipe>>(data);
+            if (json != null)
+                _recipes = json;
+        }
+        using (StreamReader r = new StreamReader(this._categoriesFilePath))
+        {
+            var data = r.ReadToEnd();
+            var json = JsonSerializer.Deserialize<List<string>>(data);
+            if (json != null)
+                _categories = json;
         }
     }
 
@@ -76,27 +86,60 @@ class Data
         var recipe = getRecipe(id);
         recipe.Instructions = newInstructions;
     }
+    
+    //TODO: The only way to edit a category is from the original Method that will edit it inside all recipes
+    public void EditCategory(Guid id, string category, string newCategory)
+    {
+        RemoveCategoryFromRecipe(id, category);
+        AddCategoryToRecipe(id, newCategory);
+    }
 
-    public void AddCategory(Guid id, string newCategory)
+    public List<string> GetAllCategories()
+    {
+        return new List<string>();
+    }
+
+    public void AddCategory(string category)
+    {
+        if(!_categories.Contains(category))
+            _categories.Add(category);
+    }
+
+    public void EditCategory(string category, string newCategory)
+    {
+        var index = _categories.IndexOf(category);
+        if (index != -1)
+        {
+            _categories[index] = category;
+            _recipes.ForEach(r => r.Categories.ForEach((c) =>
+            {
+                if (c == category)
+                    c = newCategory;
+            }));
+        }
+    }
+
+    public void RemoveCategory(string category)
+    {
+        if (_categories.Contains(category))
+            _categories.Remove(category);
+    }
+
+    public void AddCategoryToRecipe(Guid id, string newCategory)
     {
         var recipe = getRecipe(id);
         recipe.Categories.Add(newCategory);
     }
 
-    public void RemoveCategory(Guid id, string category)
+    public void RemoveCategoryFromRecipe(Guid id, string category)
     {
         var recipe = getRecipe(id);
         recipe.Categories.RemoveAll(c => c == category);
     }
 
-    public void EditCategory(Guid id, string category, string newCategory)
+    public void SaveData()
     {
-        RemoveCategory(id, category);
-        AddCategory(id, newCategory);
-    }
-
-    public void SaveRecipes()
-    {
-        File.WriteAllText(_filePath, JsonSerializer.Serialize(_recipes));
+        File.WriteAllText(_recipesFilePath, JsonSerializer.Serialize(_recipes));
+        File.WriteAllText(_categoriesFilePath, JsonSerializer.Serialize(_categories));
     }
 }

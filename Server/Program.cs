@@ -19,7 +19,7 @@ app.MapPost("/recipes", (Recipe recipe) =>
     Data data = new();
     recipe.Id = Guid.NewGuid();
     data.AddRecipe(recipe);
-    data.SaveRecipes();
+    data.SaveData();
     return Results.Created($"/recipes/{recipe.Id}",recipe);
 });
 
@@ -27,7 +27,7 @@ app.MapPut("/recipes/{id}", (Guid id, Recipe newRecipe) =>
 {
     Data data = new();
     var updatedRecipe = data.EditRecipe(id, newRecipe);
-    data.SaveRecipes();
+    data.SaveData();
     return Results.Ok(updatedRecipe);
 });
 
@@ -35,15 +35,15 @@ app.MapDelete("/recipes/{id}", (Guid id) =>
 {
     Data data = new();
     data.RemoveRecipe(id);
-    data.SaveRecipes();
+    data.SaveData();
     return Results.Ok();
 });
 
 app.MapPost("recipes/category", (Guid id ,string category) =>
 {
     Data data = new();
-    data.AddCategory(id,category);
-    data.SaveRecipes();
+    data.AddCategoryToRecipe(id,category);
+    data.SaveData();
     return Results.Created($"recipes/category/{category}",category);
 });
 
@@ -51,15 +51,15 @@ app.MapPut("recipes/category", (Guid id, string category, string newCategory) =>
 {
     Data data = new();
     data.EditCategory(id,category,newCategory);
-    data.SaveRecipes();
+    data.SaveData();
     return Results.Ok(data.getRecipe(id)); 
 });
 
 app.MapDelete("recipes/category", (Guid id, string category) =>
 {
     Data data = new();
-    data.RemoveCategory(id,category);
-    data.SaveRecipes();
+    data.RemoveCategoryFromRecipe(id,category);
+    data.SaveData();
     return Results.Ok();
 });
 
