@@ -1,6 +1,11 @@
 var builder = WebApplication.CreateBuilder(args);
 var app = builder.Build();
 
+app.MapGet("", () =>
+{
+    return Results.Ok("Welcome to Recipes API");
+});
+
 app.MapGet("/recipes", () =>
 {
     Data data = new();

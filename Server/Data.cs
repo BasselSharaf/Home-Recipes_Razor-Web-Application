@@ -110,7 +110,7 @@ class Data
         var index = _categories.IndexOf(category);
         if (index != -1)
         {
-            _categories[index] = category;
+            _categories[index] = newCategory;
             _recipes.ForEach(r => r.Categories.ForEach((c) =>
             {
                 if (c == category)
