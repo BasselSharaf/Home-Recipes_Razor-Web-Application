@@ -4,7 +4,7 @@ var app = builder.Build();
 app.MapGet("/recipes", () =>
 {
     Data data = new();
-    return data.GetRecipes();
+    return Results.Ok(data.GetRecipes());
 });
 
 app.MapGet("/recipes/{id}", (Guid id) =>
@@ -39,20 +39,43 @@ app.MapDelete("/recipes/{id}", (Guid id) =>
     return Results.Ok();
 });
 
+app.MapGet("/categories", () =>
+{
+    Data data = new();
+    return Results.Ok(data.GetAllCategories());
+
+});
+
+app.MapPost("/categories", (string category) =>
+{
+    Data data = new();
+    data.AddCategory(category);
+    data.SaveData();
+    return Results.Created($"/categories/{category}",category);
+});
+
+app.MapPut("/categories", (string category, string newCategory) =>
+{
+    Data data = new();
+    data.EditCategory(category, newCategory);
+    data.SaveData();
+    return Results.Ok($"Category ({category}) updated to ({newCategory})");
+});
+
+app.MapDelete("/categories",(string category) =>
+{
+    Data data = new();
+    data.RemoveCategory(category);
+    data.SaveData();
+    return Results.Ok();
+});
+
 app.MapPost("recipes/category", (Guid id ,string category) =>
 {
     Data data = new();
     data.AddCategoryToRecipe(id,category);
     data.SaveData();
     return Results.Created($"recipes/category/{category}",category);
-});
-
-app.MapPut("recipes/category", (Guid id, string category, string newCategory) => 
-{
-    Data data = new();
-    data.EditCategory(id,category,newCategory);
-    data.SaveData();
-    return Results.Ok(data.getRecipe(id)); 
 });
 
 app.MapDelete("recipes/category", (Guid id, string category) =>
