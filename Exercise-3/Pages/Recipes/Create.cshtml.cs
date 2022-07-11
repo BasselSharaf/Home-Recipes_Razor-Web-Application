@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Text;
+
 namespace Exercise_3.Pages.Recipes
 {
     public class CreateModel : PageModel
@@ -8,7 +10,6 @@ namespace Exercise_3.Pages.Recipes
         ILogger<CreateModel> logger;
         private readonly IConfiguration _config;
         public static HttpClient s_httpClient = new();
-        [BindProperty]
         public Recipe Recipe { get; set; } = new();
         public List<SelectListItem> Categories { get; set; } = new();
         public CreateModel(IConfiguration config, ILogger<CreateModel> logger)
@@ -31,14 +32,12 @@ namespace Exercise_3.Pages.Recipes
                     Selected = false
                 };
             });
-            Categories.ForEach(c => Console.WriteLine(c));
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            Categories.ForEach(x => Recipe.Categories.Add(x.Value));
-            Categories.ForEach(c => Console.WriteLine(c));
+            Categories.ToList().ForEach(x => Recipe.Categories.Add(x.Value));
             if(!ModelState.IsValid || Recipe == null)
                 return Page();
             HttpClient client = new HttpClient();

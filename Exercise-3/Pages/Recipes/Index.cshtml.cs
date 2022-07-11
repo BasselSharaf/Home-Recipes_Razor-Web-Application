@@ -18,6 +18,8 @@ namespace Exercise_3.Pages.Recipes
 
         public async Task OnGetAsync()
         {
+            _logger.LogInformation("About page visited at {DT}",
+                DateTime.Now.ToString());
             var fetchRecipes = await s_httpClient.GetFromJsonAsync<List<Recipe>>(Config["url"] + "recipes");
             if (fetchRecipes is not null)
                 Recipes = fetchRecipes;

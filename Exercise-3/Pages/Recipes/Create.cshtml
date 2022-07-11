@@ -26,20 +26,17 @@
                 <textarea asp-for="Recipe.Instructions" class="form-control" rows="4" cols="50" minlength="10" placeholder = "Enter different instructions on seperate lines."></textarea>
                 <span asp-validation-for="Recipe.Instructions" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Categories" class="control-label"></label>
-                <br />
-                <select asp-for="Categories" asp-items="Model.Categories" multiple="multiple" class="multi-select" rows="4" cols="50"></select>   
-                <span asp-validation-for="Categories" class="text-danger"></span>
+             <div class="form-group">
+                <label asp-for="@Model.Categories" class="control-label"></label>
+                <select asp-for="@Model.Categories" asp-items="@Model.Categories"  class="form-control" multiple></select>
+                <span asp-validation-for="@Model.Categories" class="text-danger"></span>
             </div>
-            <br />
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
-
 <div>
     <a asp-page="Index">Back to Recipes</a>
 </div>
