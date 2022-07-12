@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Text;
 
-namespace Exercise_3.Pages.Recipes
+namespace Exercise3.Pages.Recipes
 {
     public class CreateModel : PageModel
     {

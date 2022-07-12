@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Exercise_3.Pages;
-namespace Exercise_3.Pages.Recipes
+using Exercise3.Pages;
+namespace Exercise3.Pages.Recipes
 {
     public class DetailModel : PageModel
     {
