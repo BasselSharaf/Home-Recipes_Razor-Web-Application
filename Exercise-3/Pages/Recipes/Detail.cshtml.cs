@@ -22,8 +22,8 @@ namespace Exercise3.Pages.Recipes
             if (request is not null)
             {
                 FetchedRecipe = request;
-                DetailedIngredients = FetchedRecipe.Ingredients.Split(",").Select(x => $"{x}");
-                DetailedInstructions = FetchedRecipe.Instructions.Split(",").Select((x, n) => $"- {x}");
+                DetailedIngredients = FetchedRecipe.Ingredients.Split("\n").Select(x => $"{x}");
+                DetailedInstructions = FetchedRecipe.Instructions.Split("\n").Select((x, n) => $"- {x}");
                 DetailedCategories = FetchedRecipe.Categories.Select((x, n) => $"- {x}");
                 return Page();
             }
