@@ -6,20 +6,19 @@ namespace Exercise_3.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        public static HttpClient s_httpClient = new();
-        public IConfiguration Config{ get; set; }
+        private IConfiguration _config{ get; set; }
         public List<Recipe> Recipes { get; set; } = new();
         public IndexModel(IConfiguration config,
                          ILogger<IndexModel> logger)
         {
-            Config = config;
+            _config = config;
             _logger = logger;
         }
 
         public async Task OnGetAsync()
         {
-            var url = Config["url"];
-            var fetchRecipes = await s_httpClient.GetFromJsonAsync<List<Recipe>>(Config["url"]+"recipes");
+            var httpClient = new HttpClient();
+            var fetchRecipes = await httpClient.GetFromJsonAsync<List<Recipe>>(_config["url"]+"recipes");
             if (fetchRecipes is not null)
                 Recipes = fetchRecipes;
         }

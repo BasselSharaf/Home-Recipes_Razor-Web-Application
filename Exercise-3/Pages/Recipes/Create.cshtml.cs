@@ -11,7 +11,7 @@ namespace Exercise_3.Pages.Recipes
         private readonly IConfiguration _config;
         public static HttpClient s_httpClient = new();
         public Recipe Recipe { get; set; } = new();
-        public List<SelectListItem> Categories { get; set; } = new();
+
         public CreateModel(IConfiguration config, ILogger<CreateModel> logger)
         {
             _config = config;
@@ -23,26 +23,18 @@ namespace Exercise_3.Pages.Recipes
             var fetchCategories = await s_httpClient.GetFromJsonAsync<List<string>>(_config["url"] + "categories");
             if (fetchCategories == null)
                 return NotFound();
-            Categories = fetchCategories.ConvertAll(a =>
-            {
-                return new SelectListItem()
-                {
-                    Text = a,
-                    Value = a,
-                    Selected = false
-                };
-            });
+            Recipe.Categories = fetchCategories;
             return Page();
         }
 
         public async Task<IActionResult> OnPostAsync()
         {
-            Categories.ToList().ForEach(x => Recipe.Categories.Add(x.Value));
             if(!ModelState.IsValid || Recipe == null)
                 return Page();
-            HttpClient client = new HttpClient();
-            var request = await client.PostAsJsonAsync<Recipe>(_config["url"]+"recipes",Recipe);
-            return RedirectToPage("./Index");
+            var request = await s_httpClient.PostAsJsonAsync<Recipe>(_config["url"]+"recipes",Recipe);
+            if(request.IsSuccessStatusCode)
+                return RedirectToPage("./Index");
+            return Page();
         }
     }
 }
