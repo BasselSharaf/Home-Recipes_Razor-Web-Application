@@ -50,6 +50,8 @@ class Data
     public Recipe getRecipe(Guid id)
     {
         var recipe = _recipes.Find(r => r.Id == id);
+        if (recipe == null)
+            recipe = new Recipe();
         return recipe;
     }
 

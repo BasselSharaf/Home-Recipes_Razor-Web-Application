@@ -9,11 +9,12 @@
 <div class="row">
     <div class="col-md-4">
         <form method="post">
+            <input hidden asp-for="Recipe.Id" class="form-control"/>
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="@Model.Recipe.Title"  class="control-label"></label>
-                <input asp-for="@Model.Recipe.Title" class="form-control" />
-                <span asp-validation-for="@Model.Recipe.Title" class="text-danger" ></span>
+                <label asp-for="Recipe.Title"  class="control-label"></label>
+                <input asp-for="Recipe.Title" class="form-control" />
+                <span asp-validation-for="Recipe.Title" class="text-danger" ></span>
             </div>
             <div class="form-group">
                 <label asp-for="Recipe.Ingredients" class="control-label"></label>
@@ -25,13 +26,13 @@
                 <textarea asp-for="Recipe.Instructions" class="form-control" rows="4" cols="50" minlength="10" placeholder = "Enter different instructions on seperate lines."></textarea>
                 <span asp-validation-for="Recipe.Instructions" class="text-danger"></span>
             </div>
-             @*<div class="form-group">
+             <div class="form-group">
                 <label asp-for="Recipe.Categories" class="control-label"></label>
                 <select asp-for="Recipe.Categories" 
                 asp-items="@(new SelectList(Model.Recipe.Categories))"  
                 class="form-control" multiple></select>
                 <span asp-validation-for="Recipe.Categories" class="text-danger"></span>
-            </div>*@
+            </div>
             <div class="form-group">
                 <input type="submit" value="Update" class="btn btn-primary" />
             </div>

@@ -6,6 +6,7 @@ namespace Exercise_3.Pages.Recipes
     public class EditModel : PageModel
     {
         private IConfiguration _config { get; set; }
+        [BindProperty]
         public Recipe Recipe { get; set; } = new();
         public EditModel(IConfiguration config)
         {

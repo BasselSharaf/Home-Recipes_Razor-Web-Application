@@ -10,6 +10,7 @@ namespace Exercise_3.Pages.Recipes
         ILogger<CreateModel> logger;
         private readonly IConfiguration _config;
         public static HttpClient s_httpClient = new();
+        [BindProperty]
         public Recipe Recipe { get; set; } = new();
 
         public CreateModel(IConfiguration config, ILogger<CreateModel> logger)
