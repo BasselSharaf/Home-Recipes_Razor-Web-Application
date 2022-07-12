@@ -9,31 +9,31 @@
 <div class="row">
     <div class="col-md-4">
         <form method="post">
-            <input hidden asp-for="Recipe.Id" class="form-control"/>
+            <input hidden asp-for="Recipe.Id" class="form-control" />
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Recipe.Title"  class="control-label"></label>
-                <input asp-for="Recipe.Title" class="form-control" />
-                <span asp-validation-for="Recipe.Title" class="text-danger" ></span>
+            <div class="form-floating mb-3">
+                <input asp-for="Recipe.Title" id="recipeTitle" class="form-control" />
+                <label for="recipeTitle">Title</label>
+                <span asp-validation-for="Recipe.Title" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Recipe.Ingredients" class="control-label"></label>
-                <textarea asp-for="Recipe.Ingredients" class="form-control" rows="4" cols="60" minlength="10" placeholder = "Enter different ingredients on seperate lines."></textarea> 
+            <div class="form-floating mb-3">
+                <textarea asp-for="Recipe.Ingredients" id="recipeIngredients" class="form-control" style="height: 100px" minlength="10"></textarea>
+                <label for="recipeIngredients">Ingredients</label>
                 <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Recipe.Instructions" class="control-label"></label>
-                <textarea asp-for="Recipe.Instructions" class="form-control" rows="4" cols="50" minlength="10" placeholder = "Enter different instructions on seperate lines."></textarea>
+            <div class="form-floating mb-3">
+                <textarea asp-for="Recipe.Instructions" id="recipeInstructions" class="form-control" style="height: 100px" minlength="10"></textarea>
+                <label for="recipeInstructions">Instructions</label>
                 <span asp-validation-for="Recipe.Instructions" class="text-danger"></span>
             </div>
-             <div class="form-group">
-                <label asp-for="Recipe.Categories" class="control-label"></label>
-                <select asp-for="Recipe.Categories" 
-                asp-items="@(new SelectList(Model.Recipe.Categories))"  
-                class="form-select" multiple></select>
+            <div class="form-control">
+                <label asp-for="Recipe.Categories" for="selectCategory" class="form-label">Categories</label>
+                <select asp-for="Recipe.Categories" id="selectCategory"
+                        asp-items="@(new SelectList(Model.Recipe.Categories))"
+                        class="form-select" multiple></select>
                 <span asp-validation-for="Recipe.Categories" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-floating mb-3">
                 <input type="submit" value="Update" class="btn btn-primary" />
             </div>
         </form>
@@ -44,5 +44,7 @@
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

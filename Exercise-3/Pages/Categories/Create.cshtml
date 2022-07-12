@@ -7,13 +7,13 @@
     <div class="col-md-4">
         <form method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Category" class="control-label"></label>
-                <input asp-for="Category" class="form-control" min="5"/>
-                <span  asp-asp-validation-for="Category" class="text-danger" ></span>
+            <div class="form-floating mb-3">
+                <input asp-for="Category" id="categoryName" class="form-control" min="5"/>
+                <label for="categoryName">Category Name</label>
+                <span  asp-validation-for="Category" class="text-danger" ></span>
             </div>
             <br />
-            <div class="form-group">
+            <div class="form-floating mb-3">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>
