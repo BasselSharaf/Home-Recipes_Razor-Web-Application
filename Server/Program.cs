@@ -15,7 +15,7 @@ app.MapGet("/recipes", () =>
 app.MapGet("/recipes/{id}", (Guid id) =>
 {
     Data data = new();
-    Recipe recipe = data.getRecipe(id);
+    Recipe recipe = data.GetRecipe(id);
     return Results.Ok(recipe);
 });
 

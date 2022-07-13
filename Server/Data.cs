@@ -57,13 +57,13 @@ class Data
 
     public void RemoveRecipe(Guid id)
     {
-        var recipe = getRecipe(id); 
+        var recipe = GetRecipe(id); 
         _recipes.Remove(recipe);
     }
 
     public Recipe EditRecipe(Guid id, Recipe newRecipe)
     {
-        var recipe = getRecipe(id);
+        var recipe = GetRecipe(id);
         recipe.Title = newRecipe.Title;
         recipe.Ingredients = newRecipe.Ingredients;
         recipe.Instructions = newRecipe.Instructions;
@@ -73,19 +73,19 @@ class Data
 
     public void EditTitle(Guid id, string newTitle)
     {
-        var recipe = getRecipe(id);
+        var recipe = GetRecipe(id);
         recipe.Title = newTitle;
     }
 
     public void EditIngredients(Guid id, string newIngredients)
     {
-        var recipe = getRecipe(id);
+        var recipe = GetRecipe(id);
         recipe.Ingredients = newIngredients;
     }
 
     public void EditInstructions(Guid id, string newInstructions)
     {
-        var recipe = getRecipe(id);
+        var recipe = GetRecipe(id);
         recipe.Instructions = newInstructions;
     }
     
@@ -134,14 +134,14 @@ class Data
     {
         if (_categories.Contains(category))
         {
-            var recipe = getRecipe(id);
+            var recipe = GetRecipe(id);
             recipe.Categories.Add(category);
         }
     }
 
     public void RemoveCategoryFromRecipe(Guid id, string category)
     {
-        var recipe = getRecipe(id);
+        var recipe = GetRecipe(id);
         recipe.Categories.Remove(category);
     }
 
