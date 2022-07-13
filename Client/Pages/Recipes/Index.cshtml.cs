@@ -6,11 +6,11 @@ namespace Exercise3.Pages.Recipes
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        public static HttpClient s_httpClient = new();
+        private readonly IHttpClientFactory _httpClientFactory;
         public IConfiguration Config { get; set; }
         public List<Recipe> Recipes { get; set; } = new();
         public IndexModel(IConfiguration config,
-                         ILogger<IndexModel> logger)
+                         ILogger<IndexModel> logger, IHttpClientFactory httpClientFactory)
         {
             Config = config;
             _logger = logger;
@@ -20,7 +20,8 @@ namespace Exercise3.Pages.Recipes
         {
             _logger.LogInformation("About page visited at {DT}",
                 DateTime.Now.ToString());
-            var fetchRecipes = await s_httpClient.GetFromJsonAsync<List<Recipe>>(Config["url"] + "recipes");
+            var httpClient = _httpClientFactory.CreateClient();
+            var fetchRecipes = await httpClient.GetFromJsonAsync<List<Recipe>>("recipes");
             if (fetchRecipes is not null)
                 Recipes = fetchRecipes;
         }

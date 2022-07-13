@@ -12,26 +12,30 @@ class Data
         var systemPath = Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData);
         _recipesFilePath = Path.Combine(systemPath, "Recipes.json");
         _categoriesFilePath = Path.Combine(systemPath, "Categories.json");
-        if (!File.Exists(this._recipesFilePath))
+    }
+
+    public async Task LoadData()
+    {
+        if (!File.Exists(_recipesFilePath))
         {
             _recipes = new List<Recipe>();
-            File.WriteAllText(this._recipesFilePath, JsonSerializer.Serialize(_recipes));
+            await File.WriteAllTextAsync(_recipesFilePath, JsonSerializer.Serialize(_recipes));
         }
         if (!File.Exists(this._categoriesFilePath))
         {
             _recipes = new List<Recipe>();
-            File.WriteAllTextAsync(this._categoriesFilePath, JsonSerializer.Serialize(_recipes));
+            await File.WriteAllTextAsync(_categoriesFilePath, JsonSerializer.Serialize(_recipes));
         }
-        using (StreamReader r = new(this._recipesFilePath))
+        using (StreamReader r = new(_recipesFilePath))
         {
-            var data = r.ReadToEnd();
+            var data = await r.ReadToEndAsync();
             var json = JsonSerializer.Deserialize<List<Recipe>>(data);
             if (json != null)
                 _recipes = json;
         }
-        using (StreamReader r = new(this._categoriesFilePath))
+        using (StreamReader r = new(_categoriesFilePath))
         {
-            var data = r.ReadToEnd();
+            var data = await r.ReadToEndAsync();
             var json = JsonSerializer.Deserialize<List<string>>(data);
             if (json != null)
                 _categories = json;
