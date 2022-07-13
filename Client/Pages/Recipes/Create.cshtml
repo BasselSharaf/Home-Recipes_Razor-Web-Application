@@ -13,21 +13,21 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating mb-3">
                 <input asp-for="Recipe.Title" id="recipeTitle" class="form-control" />
-                <label for="recipeTitle">Title</label>
+                <label asp-for="Recipe.Title"></label>
                 <span asp-validation-for="Recipe.Title" class="text-danger" ></span>
             </div>
             <div class="form-floating mb-3">
                 <textarea asp-for="Recipe.Ingredients" id="recipeIngredients" class="form-control" style="height: 100px" minlength="10"></textarea> 
-                <label for="recipeIngredients">Ingredients</label>
+                <label asp-for="Recipe.Ingredients"></label>
                 <span asp-validation-for="Recipe.Ingredients" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
                 <textarea asp-for="Recipe.Instructions" id="recipeInstructions" class="form-control" style="height: 100px" minlength="10"></textarea>
-                <label for="recipeInstructions">Instructions</label>
+                <label asp-for="Recipe.Instructions"></label>
                 <span asp-validation-for="Recipe.Instructions" class="text-danger"></span>
             </div>
              <div>
-                <label for="selectCategory">Categories</label>
+                <label asp-for="Recipe.Categories"></label>
                 <select asp-for="Recipe.Categories" id="selectCategory" style="height: 130px"
                 asp-items="@(new SelectList(Model.Recipe.Categories))"  
                 class="form-select" multiple></select>
