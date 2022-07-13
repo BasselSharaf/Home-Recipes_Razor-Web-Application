@@ -47,7 +47,7 @@ class Data
         _recipes.Add(r);
     }
 
-    public Recipe getRecipe(Guid id)
+    public Recipe GetRecipe(Guid id)
     {
         var recipe = _recipes.Find(r => r.Id == id);
         if (recipe == null)
