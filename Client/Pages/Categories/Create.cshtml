@@ -9,7 +9,7 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating mb-3">
                 <input asp-for="Category" id="categoryName" class="form-control" min="5"/>
-                <label for="categoryName">Category Name</label>
+                <label asp-for="Category"></label>
                 <span  asp-validation-for="Category" class="text-danger" ></span>
             </div>
             <br />

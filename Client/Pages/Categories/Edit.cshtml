@@ -11,7 +11,7 @@
     <form method="post">
         <input hidden asp-for="Category" class="form-control" />
         <div class="form-floating mb-3">
-            <label for"newCategory"></label>
+            <label asp-for="NewCategory"></label>
             <input asp-for=@Model.NewCategory id="newCategory" class="form-control" min="5" />
             <span class="text-danger"></span>
         </div>
