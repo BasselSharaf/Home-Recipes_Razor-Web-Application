@@ -7,21 +7,16 @@ namespace Exercise3.Pages.Recipes
 {
     public class CreateModel : PageModel
     {
-        ILogger<CreateModel> logger;
-        private readonly IConfiguration _config;
-        public static HttpClient s_httpClient = new();
+        private readonly IHttpClientFactory _httpClientFactory;
         [BindProperty]
         public Recipe Recipe { get; set; } = new();
 
-        public CreateModel(IConfiguration config, ILogger<CreateModel> logger)
-        {
-            _config = config;
-            this.logger = logger;
-        }
+        public CreateModel(IHttpClientFactory httpClientFactory) => _httpClientFactory = httpClientFactory;
 
         public async Task<IActionResult> OnGetAsync()
         {
-            var fetchCategories = await s_httpClient.GetFromJsonAsync<List<string>>(_config["url"] + "categories");
+            var client = _httpClientFactory.CreateClient("Recipes");
+            var fetchCategories = await client.GetFromJsonAsync<List<string>>("categories");
             if (fetchCategories == null)
                 return NotFound();
             Recipe.Categories = fetchCategories;
@@ -32,7 +27,8 @@ namespace Exercise3.Pages.Recipes
         {
             if(!ModelState.IsValid || Recipe == null)
                 return Page();
-            var request = await s_httpClient.PostAsJsonAsync<Recipe>(_config["url"]+"recipes",Recipe);
+            var client = _httpClientFactory.CreateClient("Recipes");
+            var request = await client.PostAsJsonAsync<Recipe>("recipes",Recipe);
             if(request.IsSuccessStatusCode)
                 return RedirectToPage("./Index");
             return Page();

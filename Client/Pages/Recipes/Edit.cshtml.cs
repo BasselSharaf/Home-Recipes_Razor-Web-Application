@@ -5,18 +5,16 @@ namespace Exercise3.Pages.Recipes
 {
     public class EditModel : PageModel
     {
-        private IConfiguration _config { get; set; }
+        private readonly IHttpClientFactory _httpClientFactory;
         [BindProperty]
         public Recipe Recipe { get; set; } = new();
-        public EditModel(IConfiguration config)
-        {
-            _config = config;
-        }
+        public EditModel(IHttpClientFactory httpClientFactory) =>_httpClientFactory= httpClientFactory;
+        
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            var httpClient = new HttpClient();
-            var req = await httpClient.GetFromJsonAsync<Recipe>(_config["url"] + "recipes/" + id);
+            var httpClient = _httpClientFactory.CreateClient("Recipes");
+            var req = await httpClient.GetFromJsonAsync<Recipe>("recipes/" + id);
             if (req == null)
                 return NotFound();
             Recipe = req;
