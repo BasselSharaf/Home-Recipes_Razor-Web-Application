@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+
 class Data
 {
     private List<Recipe> _recipes { get; set; } = new();
@@ -19,16 +20,16 @@ class Data
         if (!File.Exists(this._categoriesFilePath))
         {
             _recipes = new List<Recipe>();
-            File.WriteAllText(this._categoriesFilePath, JsonSerializer.Serialize(_recipes));
+            File.WriteAllTextAsync(this._categoriesFilePath, JsonSerializer.Serialize(_recipes));
         }
-        using (StreamReader r = new StreamReader(this._recipesFilePath))
+        using (StreamReader r = new(this._recipesFilePath))
         {
             var data = r.ReadToEnd();
             var json = JsonSerializer.Deserialize<List<Recipe>>(data);
             if (json != null)
                 _recipes = json;
         }
-        using (StreamReader r = new StreamReader(this._categoriesFilePath))
+        using (StreamReader r = new(this._categoriesFilePath))
         {
             var data = r.ReadToEnd();
             var json = JsonSerializer.Deserialize<List<string>>(data);
@@ -113,11 +114,12 @@ class Data
         if (index != -1)
         {
             _categories[index] = newCategory;
-            _recipes.ForEach(r => r.Categories.ForEach((c) =>
-            {
-                if (c == category)
-                    c = newCategory;
-            }));
+            foreach(var recipe in _recipes)
+                foreach(var c in recipe.Categories)
+                    if (c == category)
+                    {
+                        recipe.Categories[recipe.Categories.IndexOf(c)] = newCategory;
+                    }
         }
     }
 
@@ -126,7 +128,9 @@ class Data
         if (_categories.Contains(category))
         {
             _categories.Remove(category);
-            _recipes.Where(r => r.Categories.Contains(category)).ToList().ForEach(r => r.Categories.Remove(category));
+            var recipes =_recipes.Where(r => r.Categories.Contains(category)).ToList();
+            foreach (var recipe in recipes)
+                recipe.Categories.Remove(category);
         }
     }
 
@@ -145,9 +149,14 @@ class Data
         recipe.Categories.Remove(category);
     }
 
-    public void SaveData()
+    public async Task WriteToFile(string path, string data)
     {
-        File.WriteAllText(_recipesFilePath, JsonSerializer.Serialize(_recipes));
-        File.WriteAllText(_categoriesFilePath, JsonSerializer.Serialize(_categories));
+
+    }
+
+    public async Task SaveDataAsync()
+    {
+        await File.WriteAllTextAsync(_recipesFilePath, JsonSerializer.Serialize(_recipes));
+        await File.WriteAllTextAsync(_categoriesFilePath, JsonSerializer.Serialize(_categories));
     }
 }
