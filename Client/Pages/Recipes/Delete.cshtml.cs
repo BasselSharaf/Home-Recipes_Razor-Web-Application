@@ -29,8 +29,8 @@ namespace Exercise3.Pages.Recipes
 
         public async Task<IActionResult> OnPostAsync(Guid id)
         {
-            HttpClient client = new HttpClient();
-            var request = await client.DeleteAsync(_config["url"]+$"recipes/"+id);
+            HttpClient client = _httpClientFactory.CreateClient("Recipes");
+            var request = await client.DeleteAsync($"recipes/"+id);
             return RedirectToPage("./Index");
         }
     }

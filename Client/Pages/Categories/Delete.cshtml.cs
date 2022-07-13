@@ -5,13 +5,13 @@ namespace Exercise3.Pages.Categories
 {
     public class DeleteModel : PageModel
     {
-        private IConfiguration _config { get; set; }
+        private readonly IHttpClientFactory _httpClientFactory;
         [BindProperty]
         public string Category { get; set; }
 
-        public DeleteModel (IConfiguration config)
+        public DeleteModel (IConfiguration config,IHttpClientFactory httpClientFactory)
         {
-            _config = config;
+            _httpClientFactory = httpClientFactory;
             Category = "";
         }
 
@@ -22,8 +22,8 @@ namespace Exercise3.Pages.Categories
 
         public async Task<IActionResult> OnPostAsync()
         {
-            HttpClient client = new HttpClient();
-            var request = await client.DeleteAsync(_config["url"] + $"categories?category={Category}");
+            var client = _httpClientFactory.CreateClient("Recipes");
+            var request = await client.DeleteAsync($"categories?category={Category}");
             if (request.IsSuccessStatusCode)
                 return RedirectToPage("./Index");
             return Page();

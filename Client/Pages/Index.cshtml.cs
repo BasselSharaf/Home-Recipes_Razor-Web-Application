@@ -5,20 +5,14 @@ namespace Exercise3.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-        private IConfiguration _config{ get; set; }
+        private readonly IHttpClientFactory _httpClientFactory;
         public List<Recipe> Recipes { get; set; } = new();
-        public IndexModel(IConfiguration config,
-                         ILogger<IndexModel> logger)
-        {
-            _config = config;
-            _logger = logger;
-        }
+        public IndexModel(IHttpClientFactory httpClientFactory) => _httpClientFactory = httpClientFactory;
 
         public async Task OnGetAsync()
         {
-            var httpClient = new HttpClient();
-            var fetchRecipes = await httpClient.GetFromJsonAsync<List<Recipe>>(_config["url"]+"recipes");
+            var client = _httpClientFactory.CreateClient("Recipes");
+            var fetchRecipes = await client.GetFromJsonAsync<List<Recipe>>("recipes");
             if (fetchRecipes is not null)
                 Recipes = fetchRecipes;
         }

@@ -5,14 +5,14 @@ namespace Exercise3.Pages.Categories
 {
     public class EditModel : PageModel
     {
-        private IConfiguration _config { get; set; }
+        private readonly IHttpClientFactory _httpClientFactory;
         [BindProperty]
         public string Category { get; set; }
         [BindProperty]
         public string NewCategory { get; set; }
-        public EditModel(IConfiguration config)
+        public EditModel(IHttpClientFactory httpClientFactory)
         {
-            _config = config;
+            _httpClientFactory = httpClientFactory;
             Category = "";
             NewCategory = "";   
         }
@@ -24,8 +24,8 @@ namespace Exercise3.Pages.Categories
 
         public async Task<IActionResult> OnPostAsync()
         {
-            HttpClient client = new HttpClient();
-            var request = await client.PutAsync(_config["url"] + $"categories?category={Category}&newCategory={NewCategory}",null);
+            var client = _httpClientFactory.CreateClient("Recipes");
+            var request = await client.PutAsync($"categories?category={Category}&newCategory={NewCategory}",null);
             if (request.IsSuccessStatusCode)
                 return RedirectToPage("./Index");
             return Page();

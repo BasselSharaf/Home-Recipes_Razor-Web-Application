@@ -13,8 +13,8 @@ namespace Exercise3.Pages.Recipes
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
-            var httpClient = _httpClientFactory.CreateClient("Recipes");
-            var req = await httpClient.GetFromJsonAsync<Recipe>("recipes/" + id);
+            var client = _httpClientFactory.CreateClient("Recipes");
+            var req = await client.GetFromJsonAsync<Recipe>("recipes/" + id);
             if (req == null)
                 return NotFound();
             Recipe = req;
@@ -23,8 +23,8 @@ namespace Exercise3.Pages.Recipes
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var httpClient = new HttpClient();
-            var request = await httpClient.PutAsJsonAsync<Recipe>(_config["url"] +"recipes/"+Recipe.Id,Recipe);
+            var client = _httpClientFactory.CreateClient("Recipes");
+            var request = await client.PutAsJsonAsync<Recipe>("recipes/"+Recipe.Id,Recipe);
             if (request == null || !ModelState.IsValid)
                 return Page();
             return RedirectToPage("./Index");
