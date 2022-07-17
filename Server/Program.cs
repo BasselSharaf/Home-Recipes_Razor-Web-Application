@@ -1,5 +1,12 @@
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors();
+
 var app = builder.Build();
+
+app.UseCors(
+        options => options.WithOrigins("https://localhost:7015").AllowAnyMethod().AllowAnyHeader()
+    );
 
 app.MapGet("", () =>
 {
