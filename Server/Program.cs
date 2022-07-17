@@ -1,9 +1,9 @@
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddCors();
-
 using IHost host = Host.CreateDefaultBuilder(args).Build();
 IConfiguration config = host.Services.GetRequiredService<IConfiguration>();
+
+builder.Services.AddCors();
 
 var app = builder.Build();
 
