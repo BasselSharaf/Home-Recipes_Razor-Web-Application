@@ -2,10 +2,13 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddCors();
 
+using IHost host = Host.CreateDefaultBuilder(args).Build();
+IConfiguration config = host.Services.GetRequiredService<IConfiguration>();
+
 var app = builder.Build();
 
 app.UseCors(
-        options => options.WithOrigins("https://localhost:7015").AllowAnyMethod().AllowAnyHeader()
+    options => options.WithOrigins(config.GetValue<string>("clientUrl")).AllowAnyMethod().AllowAnyHeader()
     );
 
 app.MapGet("", () =>
