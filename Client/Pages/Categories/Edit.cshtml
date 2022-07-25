@@ -7,7 +7,7 @@
 <div class="card border-primary mb-3" style="max-width: 520px;margin: auto; margin-block:40px; background: white">
     <div class="card-header">What will the new category title of "@Model.Category" be?</div>
     <div class="card-body">
-        <form method="post" style="text-align: center;">
+        <form id="editForm" method="post" style="text-align: center;">
             <div class="form-floating">
                 <input asp-for=@Model.NewCategory id="newCategory" class="form-control" minlength="3">
                 <label for="newCategory" asp-for="NewCategory">New title </label>
@@ -32,7 +32,7 @@
             showConfirmButton: false,
             timer: 1500
         }).then((result) => {
-            document.getElementById("createForm").submit();
+            document.getElementById("editForm").submit();
         });
     }
 </script>
