@@ -3,22 +3,37 @@
 @{
     ViewData["Title"] = "Create";
 }
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
+
+<div class="card border-primary mb-3" style="max-width: 520px;margin: auto; margin-block:40px; background: white">
+    <div class="card-header">Add New Category</div>
+    <div class="card-body">
+        <form method="post" id="createForm">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Category" id="categoryName" class="form-control" min="5"/>
-                <label asp-for="Category"></label>
-                <span  asp-validation-for="Category" class="text-danger" ></span>
+            <div class="form-floating mb-2">
+                <input asp-for="Category" id="categoryName" class="form-control" minlength="3" />
+                <label asp-for="Category">Category Title</label>
+                <span asp-validation-for="Category" class="text-danger"></span>
             </div>
-            <br />
             <div class="form-floating mb-3">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <button type="button" class="btn btn-danger" onclick="confirmCreate()">Create</button>
+                <button type="button" class="btn btn-secondary" onclick="window.history.back()">Back</button>
             </div>
         </form>
+
     </div>
 </div>
-<div>
-    <a asp-page="RecipesIndex">Back to Recipes</a>
-</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    function confirmCreate() {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Category Created',
+            showConfirmButton: false,
+            timer: 1500
+        }).then((result) => {
+            document.getElementById("createForm").submit();
+        });
+    }
+</script>

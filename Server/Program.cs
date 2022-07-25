@@ -37,7 +37,7 @@ app.MapPost("/recipes", async (Recipe recipe) =>
     await data.AddRecipeAsync(recipe);
     return Results.Created($"/recipes/{recipe.Id}",recipe);
 });
-
+    
 app.MapPut("/recipes/{id}", async (Guid id, Recipe newRecipe) =>
 {
     Data data = new();

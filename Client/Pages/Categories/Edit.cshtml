@@ -3,23 +3,36 @@
 @{
     ViewData["Title"] = "Edit";
 }
-<h1>Edit</h1>
 
-<h3>What will the new category title of <b>@Model.Category</b> be?</h3>
-
-<div>
-    <form method="post">
-        <input hidden asp-for="Category" class="form-control" />
-        <div class="form-floating mb-3">
-            <label asp-for="NewCategory"></label>
-            <input asp-for=@Model.NewCategory id="newCategory" class="form-control" min="5" />
-            <span class="text-danger"></span>
-        </div>
-        <br />
-        <div class="form-floating mb-3">
-            <input type="submit" value="Update" class="btn btn-danger" />
-        </div>
-
-    </form>
-    <a asp-page="./Index">Back to List</a>
+<div class="card border-primary mb-3" style="max-width: 520px;margin: auto; margin-block:40px; background: white">
+    <div class="card-header">What will the new category title of "@Model.Category" be?</div>
+    <div class="card-body">
+        <form method="post" style="text-align: center;">
+            <div class="form-floating">
+                <input asp-for=@Model.NewCategory id="newCategory" class="form-control" minlength="3">
+                <label for="newCategory" asp-for="NewCategory">New title </label>
+                <span class="text-danger"></span>
+            </div>
+            <br />
+            <div class="form-floating">
+                <button type="button" class="btn btn-danger" onclick="confirmEdit()">Update</button>
+                <button type="button" class="btn btn-secondary" onclick="window.history.back()">Back</button>
+            </div>
+        </form>
+    </div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    function confirmEdit() {
+        Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Category Edited',
+            showConfirmButton: false,
+            timer: 1500
+        }).then((result) => {
+            document.getElementById("createForm").submit();
+        });
+    }
+</script>

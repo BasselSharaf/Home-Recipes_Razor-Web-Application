@@ -13,7 +13,7 @@ namespace Exercise3.Pages.Categories
         public async Task<IActionResult> OnGetAsync()
         {
             var client = _httpClientFactory.CreateClient("Recipes");
-            var request = await client.GetFromJsonAsync<List<string>>(_config["url"] + "categories");
+            var request = await client.GetFromJsonAsync<List<string>>("categories");
             if (request == null)
                 return NotFound();
             Categories = request;
