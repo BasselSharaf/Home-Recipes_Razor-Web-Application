@@ -108,7 +108,6 @@ class Data
         await SaveDataAsync();
     }
     
-    //TODO: The only way to edit a category is from the original Method that will edit it inside all recipes
     public async Task EditCategoryAsync(Guid id, string category, string newCategory)
     {
         await LoadData();
@@ -120,6 +119,7 @@ class Data
     public async Task<List<string>> GetAllCategoriesAsync()
     {
         await LoadData();
+        _categories.Sort();
         return _categories;
     }
 
@@ -134,16 +134,15 @@ class Data
     public async Task EditCategoryAsync(string category, string newCategory)
     {
         await LoadData();
-        var index = _categories.IndexOf(category);
-        if (index != -1)
+        if (_categories.Contains(category))
         {
-            _categories[index] = newCategory;
-            foreach(var recipe in _recipes)
-                foreach(var c in recipe.Categories)
-                    if (c == category)
-                    {
-                        recipe.Categories[recipe.Categories.IndexOf(c)] = newCategory;
-                    }
+            foreach(var recipe in _recipes.Where(r => r.Categories.Contains(category)))
+            {
+                recipe.Categories.Remove(category);
+                recipe.Categories.Add(newCategory);
+            }
+            _categories.Remove(category);
+            _categories.Add(newCategory);
         }
         await SaveDataAsync();
     }
