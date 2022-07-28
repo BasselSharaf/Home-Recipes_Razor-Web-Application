@@ -36,15 +36,15 @@
                         </div>
                         <div class="card-footer text-center">
                             <a class="btn btn-primary" asp-page="Edit"
-                               asp-route-id="Model.fetchedRecipe.Id">
+                               asp-route-id="@Model.FetchedRecipe.Id">
                                 <i class="bi bi-pencil-square"></i>
                             </a>
                             <a class="btn btn-danger" asp-page="Delete"
-                               asp-route-id="Model.fetchedRecipe.Id">
+                               asp-route-id="@Model.FetchedRecipe.Id">
                                 <i class="bi bi-trash"></i>
                             </a>
                             <a class="btn btn-secondary" asp-page="Index"
-                               asp-route-id="Model.fetchedRecipe.Id">
+                               asp-route-id="@Model.FetchedRecipe.Id">
                                 <i class="bi bi-arrow-return-left"></i>
                             </a>
                         </div>
