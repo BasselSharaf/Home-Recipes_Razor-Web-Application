@@ -8,7 +8,7 @@
         <div class="col-md-5">
             <div class="card">
                 <div class="card-body">
-                    <h4 class="card-title text-center">@Model.Recipe.Title</h4>
+                    <h4 class="card-title text-center">Edit "@Model.Recipe.Title"   </h4>
                     <form method="post">
                         <input hidden asp-for="Recipe.Id" class="form-control" />
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -30,13 +30,13 @@
                             <span asp-validation-for="Recipe.Instructions" class="text-danger"></span>
                         </div>
                         <div class="form-control">
-                            <label asp-for="Recipe.Categories" for="selectCategory" class="form-label"></label>
-                            <select asp-for="Recipe.Categories" id="selectCategory"
-                                    asp-items="@(new SelectList(Model.Recipe.Categories))"
+                            <label asp-for="Categories" for="selectCategory" class="form-label"></label>
+                            <select asp-for="Categories" id="selectCategory"
+                                    asp-items="@(new SelectList(Model.Categories))"
                                     class="form-select" multiple></select>
-                            <span asp-validation-for="Recipe.Categories" class="text-danger"></span>
+                            <span asp-validation-for="Categories" class="text-danger"></span>
                         </div>
-                         <div class="card-footer text-center">
+                        <div class="card-footer text-center">
                             <button class="btn btn-primary" type="submit">
                                 Update
                             </button>
@@ -50,12 +50,9 @@
         </div>
     </div>
 </div>
-<div>
-    <a asp-page="Index">Back to Recipes</a>
-</div>
 
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-            }
+@{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

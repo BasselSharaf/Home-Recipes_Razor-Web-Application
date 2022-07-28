@@ -8,16 +8,20 @@ namespace Exercise3.Pages.Recipes
         private readonly IHttpClientFactory _httpClientFactory;
         [BindProperty]
         public Recipe Recipe { get; set; } = new();
+        [BindProperty]
+        public List<string> Categories { get; set; } = new();
         public EditModel(IHttpClientFactory httpClientFactory) =>_httpClientFactory= httpClientFactory;
         
 
         public async Task<IActionResult> OnGetAsync(Guid id)
         {
             var client = _httpClientFactory.CreateClient("Recipes");
-            var req = await client.GetFromJsonAsync<Recipe>("recipes/" + id);
-            if (req == null)
+            var categoriesReq = await client.GetFromJsonAsync<List<string>>("categories");
+            var recipeReq = await client.GetFromJsonAsync<Recipe>("recipes/" + id);
+            if (recipeReq == null || categoriesReq == null)
                 return NotFound();
-            Recipe = req;
+            Recipe = recipeReq;
+            Categories = categoriesReq;
             return Page();
         }
 
