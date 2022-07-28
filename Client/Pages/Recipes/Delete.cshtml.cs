@@ -21,8 +21,8 @@ namespace Exercise3.Pages.Recipes
                 return NotFound(); ;
             FetchedRecipe = request;
             DetailedIngredients = FetchedRecipe.Ingredients.Split("\n").Select(x => $"{x}");
-            DetailedInstructions = FetchedRecipe.Instructions.Split("\n").Select((x, n) => $"{x}");
-            DetailedCategories = FetchedRecipe.Categories.Select((x, n) => $"{x}");
+            DetailedInstructions = FetchedRecipe.Instructions.Split("\n").Select((x, n) => $"- {x}");
+            DetailedCategories = FetchedRecipe.Categories.Select((x, n) => $"- {x}");
             return Page();
                 
         }
