@@ -9,7 +9,6 @@ namespace Exercise3.Pages.Recipes
         public Recipe FetchedRecipe { get; set; } = new();
         public IEnumerable<string> DetailedIngredients { get; set; } = new List<string>();
         public IEnumerable<string> DetailedInstructions { get; set; } = new List<string>();
-        public IEnumerable<string> DetailedCategories { get; set; } = new List<string>();
 
         public DetailModel(IHttpClientFactory httpClientFactory) => _httpClientFactory = httpClientFactory;
         
@@ -21,8 +20,7 @@ namespace Exercise3.Pages.Recipes
             {
                 FetchedRecipe = request;
                 DetailedIngredients = FetchedRecipe.Ingredients.Split("\n").Select(x => $"{x}");
-                DetailedInstructions = FetchedRecipe.Instructions.Split("\n").Select((x, n) => $"- {x}");
-                DetailedCategories = FetchedRecipe.Categories.Select((x, n) => $"- {x}");
+                DetailedInstructions = FetchedRecipe.Instructions.Split("\n").Select((x, n) => $"{x}");
                 return Page();
             }
             else
