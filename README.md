@@ -1,15 +1,20 @@
-# Home Recipes - Razor Web Application
+# **Home Recipes - Razor Web Application**
 ![View](https://user-images.githubusercontent.com/15571269/181650870-8d396d7c-5f5d-4a25-b7cf-5dc269bd614e.png)
+
 ## The project uses the following:
 - [ASP.NET Core 6](https://docs.microsoft.com/en-us/aspnet/core/release-notes/aspnetcore-6.0?view=aspnetcore-6.0)
 - [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
 - [Sweetalert2](https://sweetalert2.github.io/#examples)
+
+## Project structure
+- The proejct is divided into two parts the Server using ASP.NET Core [Minimal API](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-6.0) and the Client using ASP.NET Core [Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-6.0&tabs=visual-studio).
 
 ## Functionality
 
 * List, add and edit recipes.
 * List, add and edit recipe categories.
 * All the data is stored in a json file on disk.
+
 
 # Screenshots
 ![View](https://user-images.githubusercontent.com/15571269/181650870-8d396d7c-5f5d-4a25-b7cf-5dc269bd614e.png)
