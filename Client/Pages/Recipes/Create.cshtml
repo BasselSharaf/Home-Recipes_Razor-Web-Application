@@ -10,7 +10,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title text-center">Create Recipe</h4>
-                    <form method="post">
+                    <form method="post" id="createForm">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-floating mb-3">
                             <input asp-for="Recipe.Title" id="recipeTitle" class="form-control" />
@@ -39,7 +39,9 @@
                             <span asp-validation-for="Recipe.Categories" class="text-danger"></span>
                         </div>
                         <div class="card-footer text-center btn">
-                            <input type="submit" value="Create" class="btn btn-primary" />
+                            <button type="button" onclick="confirmCreate(this)" value="Create" class="btn btn-primary">
+                                Create
+                            </button>
                             <a class="btn btn-secondary" asp-page="Index">
                                 Cancel
                             </a>
@@ -50,3 +52,21 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    function confirmCreate() {
+        let form = document.getElementById("createForm").submit();
+        if (form.valid) {
+            Swal.fire({
+                icon: 'success',
+                title: 'Recipe Created',
+                showConfirmButton: false,
+                timer: 1500
+            }).then((result) => {
+                submit();
+            });
+        }else{
+            form.submit();
+        }
+    }
+</script>

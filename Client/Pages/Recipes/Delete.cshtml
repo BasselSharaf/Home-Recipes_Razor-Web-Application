@@ -37,9 +37,9 @@
                             </ol>
                         </div>
                         <div class="card-footer text-center">
-                            <form method="post">
+                            <form method="post" id="deleteForm">
                                 <input type="hidden" asp-for="FetchedRecipe.Id" />
-                                <input type="submit" value="Delete" class="btn btn-danger" />
+                                <input type="button" onclick="confirmEdit()" value="Delete" class="btn btn-danger" />
                                 <a class="btn btn-secondary" asp-page="Index"
                                    asp-route-id="@Model.FetchedRecipe.Id">
                                     Cancel
@@ -52,3 +52,16 @@
         </div>
     </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    function confirmEdit() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Recipe Deleted',
+            showConfirmButton: false,
+            timer: 1500
+        }).then((result) => {
+            document.getElementById("deleteForm").submit();
+        });
+    }
+</script>

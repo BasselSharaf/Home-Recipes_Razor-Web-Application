@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-body">
                     <h4 class="card-title text-center">Edit "@Model.Recipe.Title"   </h4>
-                    <form method="post">
+                    <form method="post" id="editForm">
                         <input hidden asp-for="Recipe.Id" class="form-control" />
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-floating mb-3">
@@ -37,7 +37,7 @@
                             <span asp-validation-for="Categories" class="text-danger"></span>
                         </div>
                         <div class="card-footer text-center">
-                            <button class="btn btn-primary" type="submit">
+                            <button class="btn btn-primary" type="button" onclick="confirmEdit()">
                                 Update
                             </button>
                             <a class="btn btn-secondary" asp-page="Index">
@@ -50,9 +50,16 @@
         </div>
     </div>
 </div>
-
-@section Scripts {
-@{
-    await Html.RenderPartialAsync("_ValidationScriptsPartial");
-}
-}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script type="text/javascript">
+    function confirmEdit() {
+        Swal.fire({
+            icon: 'success',
+            title: 'Recipe Edited',
+            showConfirmButton: false,
+            timer: 1500
+        }).then((result) => {
+            document.getElementById("editForm").submit();
+        });
+    }
+</script>

@@ -15,7 +15,7 @@
                 <span asp-validation-for="Category" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <button type="button" class="btn btn-danger" onclick="confirmCreate()">Create</button>
+                <button type="button" class="btn btn-primary" onclick="confirmCreate()">Create</button>
                 <button type="button" class="btn btn-secondary" onclick="window.history.back()">Back</button>
             </div>
         </form>
@@ -27,7 +27,6 @@
 <script type="text/javascript">
     function confirmCreate() {
         Swal.fire({
-            position: 'top-end',
             icon: 'success',
             title: 'Category Created',
             showConfirmButton: false,
