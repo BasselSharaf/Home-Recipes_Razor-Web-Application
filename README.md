@@ -1,4 +1,4 @@
-# Recipes - Razor Web Application
+# Home Recipes - Razor Web Application
 ![View](https://user-images.githubusercontent.com/15571269/181650870-8d396d7c-5f5d-4a25-b7cf-5dc269bd614e.png)
 ## The project uses the following:
 - [ASP.NET Core 6](https://docs.microsoft.com/en-us/aspnet/core/release-notes/aspnetcore-6.0?view=aspnetcore-6.0)
