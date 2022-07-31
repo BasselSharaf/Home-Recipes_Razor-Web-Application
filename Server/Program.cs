@@ -1,20 +1,32 @@
+using Microsoft.OpenApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
 
 using IHost host = Host.CreateDefaultBuilder(args).Build();
 IConfiguration config = host.Services.GetRequiredService<IConfiguration>();
 
 builder.Services.AddCors();
+builder.Services.AddControllers();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+    options.RoutePrefix = string.Empty;
+});
 
 app.UseCors(
     options => options.WithOrigins(config.GetValue<string>("clientUrl")).AllowAnyMethod().AllowAnyHeader()
     );
-
-app.MapGet("", () =>
-{
-    return Results.Ok("Welcome to Recipes API");
-});
 
 app.MapGet("/recipes", async () =>
 {
