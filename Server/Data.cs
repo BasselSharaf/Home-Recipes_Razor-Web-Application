@@ -9,8 +9,8 @@ class Data
 
     public Data()
     {
-        _recipesFilePath = Path.Combine(Environment.CurrentDirectory, "Data/Recipes.json");
-        _categoriesFilePath = Path.Combine(Environment.CurrentDirectory, "Data/Categories.json");
+        _recipesFilePath = Path.Combine(Environment.CurrentDirectory, "Data", "Recipes.json");
+        _categoriesFilePath = Path.Combine(Environment.CurrentDirectory, "Data", "Categories.json");
     }
 
     public async Task LoadData()
