@@ -10,7 +10,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
-app.Logger.LogInformation("The app started");
 
 app.UseSwagger();
 app.UseSwaggerUI();
