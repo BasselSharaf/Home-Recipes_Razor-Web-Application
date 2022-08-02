@@ -152,7 +152,6 @@ class Data
 
     public async Task LoadData()
     {
-        // Creating the files if they do not exist
         try
         {
             if (!File.Exists(_recipesFilePath))
