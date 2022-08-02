@@ -162,8 +162,8 @@ class Data
             }
             if (!File.Exists(this._categoriesFilePath))
             {
-                _recipes = new List<Recipe>();
-                await File.WriteAllTextAsync(_categoriesFilePath, JsonSerializer.Serialize(_recipes));
+                _categories = new List<string>();
+                await File.WriteAllTextAsync(_categoriesFilePath, JsonSerializer.Serialize(_categories));
             }
         }
         catch (Exception ex)
