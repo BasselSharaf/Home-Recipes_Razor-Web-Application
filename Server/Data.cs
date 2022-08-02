@@ -160,7 +160,7 @@ class Data
                 _recipes = new List<Recipe>();
                 await File.WriteAllTextAsync(_recipesFilePath, JsonSerializer.Serialize(_recipes));
             }
-            if (!File.Exists(this._categoriesFilePath))
+            if (!File.Exists(_categoriesFilePath))
             {
                 _categories = new List<string>();
                 await File.WriteAllTextAsync(_categoriesFilePath, JsonSerializer.Serialize(_categories));
