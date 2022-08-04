@@ -4,7 +4,7 @@
     ViewData["Title"] = "Delete";
 }
 <div class="card border-primary mb-3" style="max-width: 520px;margin: auto; margin-block:40px; background: white">
-    <div class="card-header">Are you sure you want to delete @Model.Category ?</div>
+    <div class="card-header">Are you sure you want to delete "@Model.Category" ?</div>
     <div class="card-body">
         <form method="post" id="deleteForm">
             <input type="hidden" asp-for="Category" />
