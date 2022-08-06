@@ -5,7 +5,7 @@
 <div class="container">
     <br />
     <div class="row justify-content-center">
-        <div class="col-md-5">
+        <div class="col-md">
             <div class="card">
                 <div class="card-body">
                     <div class="list-group">
@@ -19,22 +19,30 @@
                                     <span style="font-size:12px; margin-top:5px; margin-right: 5px;" class="badge rounded-pill bg-primary">@category</span>
                                 }
                             </div>
-                            <h5 class="card-title">Ingredients</h5>
-                            <ul class="list-group ">
-                                @foreach (var ingredient in Model.DetailedIngredients)
-                                {
-                                    <li class="list-group-item">@ingredient</li>
-                                }
-                            </ul>
                         </div>
                         <div class="card-body text-dark list-group-item">
-                            <h5 class="card-title">Instructions</h5>
-                            <ol class="list-group list-group-numbered">
-                                @foreach (var instruction in Model.DetailedInstructions)
-                                {
-                                    <li class="list-group-item">@instruction</li>
-                                }
-                            </ol>
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h5 class="card-title">Ingredients</h5>
+                                        <ul class="list-group ">
+                                            @foreach (var ingredient in Model.DetailedIngredients)
+                                            {
+                                                <li class="list-group-item">@ingredient</li>
+                                            }
+                                        </ul>
+                                    </div>
+                                    <div class="col">
+                                        <h5 class="card-title">Instructions</h5>
+                                        <ol class="list-group list-group-numbered">
+                                            @foreach (var instruction in Model.DetailedInstructions)
+                                            {
+                                                <li class="list-group-item">@instruction</li>
+                                            }
+                                        </ol>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-footer text-center">
                             <form method="post" id="deleteForm">
