@@ -31,7 +31,7 @@
                         </div>
                         <div class="form-control">
                             <label asp-for="Categories" for="selectCategory" class="form-label"></label>
-                            <select asp-for="Categories" id="selectCategory"
+                            <select asp-for="Recipe.Categories" id="selectCategory"
                                     asp-items="@(new SelectList(Model.Categories))"
                                     class="form-select" multiple></select>
                             <span asp-validation-for="Categories" class="text-danger"></span>

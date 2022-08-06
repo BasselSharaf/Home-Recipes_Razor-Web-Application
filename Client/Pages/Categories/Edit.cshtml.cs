@@ -12,9 +12,7 @@ namespace Exercise3.Pages.Categories
         public string NewCategory { get; set; }
         public EditModel(IHttpClientFactory httpClientFactory)
         {
-            _httpClientFactory = httpClientFactory;
-            Category = "";
-            NewCategory = "";   
+            _httpClientFactory = httpClientFactory; 
         }
 
         public void OnGet(string title)

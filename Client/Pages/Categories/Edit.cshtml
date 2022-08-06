@@ -8,10 +8,12 @@
     <div class="card-header">What will the new category title of "@Model.Category" be?</div>
     <div class="card-body">
         <form id="editForm" method="post" style="text-align: center;">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-floating">
-                <input asp-for=@Model.NewCategory id="newCategory" class="form-control" minlength="3">
-                <label for="newCategory" asp-for="NewCategory">New title </label>
-                <span class="text-danger"></span>
+                <input asp-for="Category" type="hidden" />
+                <input asp-for="NewCategory" type="text" id="recipeTitle" class="form-control" minlength="3" />
+                <label for="newCategoryInput" asp-for="NewCategory"></label>
+                <span asp-validation-for="NewCategory" class="text-danger"></span>
             </div>
             <br />
             <div class="form-floating">
@@ -27,7 +29,7 @@
     function confirmEdit() {
         Swal.fire({
             icon: 'success',
-            title: 'Category Edited',
+            title: 'Category Updated',
             showConfirmButton: false,
             timer: 1500
         }).then((result) => {
