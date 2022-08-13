@@ -6,7 +6,7 @@ namespace Exercise3.Pages.Categories
     public class IndexModel : PageModel
     {
         private readonly IHttpClientFactory _httpClientFactory;
-        private IConfiguration _config { get; set; }
+        //private IConfiguration _config { get; set; }
         public List<string> Categories { get; set; } = new();
         public IndexModel(IHttpClientFactory httpClientFactory) => _httpClientFactory = httpClientFactory;
 

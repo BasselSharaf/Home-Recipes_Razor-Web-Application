@@ -5,14 +5,18 @@ namespace Exercise3.Pages.Categories
 {
     public class EditModel : PageModel
     {
+        private readonly IConfiguration _config;
         private readonly IHttpClientFactory _httpClientFactory;
         [BindProperty]
         public string Category { get; set; }
         [BindProperty]
         public string NewCategory { get; set; }
-        public EditModel(IHttpClientFactory httpClientFactory)
+        public EditModel(IConfiguration config, IHttpClientFactory httpClientFactory)
         {
-            _httpClientFactory = httpClientFactory; 
+            _config = config;
+            Category = "";
+            NewCategory = "";
+            _httpClientFactory = httpClientFactory;
         }
 
         public void OnGet(string title)
