@@ -11,7 +11,11 @@
         <div class="col">
             <div class="card text-center">
                 <div class="card-body">
-                    <h5 class="card-title">@category</h5>
+                    <h5 class="card-title">
+                        <a style="text-decoration:none;" asp-page="../Recipes/Index" asp-route-category="@category">
+                            @category
+                            </a>
+                        </h5>
                     <div class="btn-group">
                         <a class="btn btn-primary" asp-page="Edit" 
                         asp-route-title="@category">
