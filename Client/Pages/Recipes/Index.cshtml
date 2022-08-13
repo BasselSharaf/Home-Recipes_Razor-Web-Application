@@ -4,22 +4,26 @@
     ViewData["Title"] = "Index";
 }
 <div></div>
-<h1 class="text-center my-4" style="color:white">Recipes</h1>
+<h1 class="text-center my-4" style="color:white">@Model.ChoosenCategory Recipes</h1>
 <div class="row justify-content-center g-4">
     @foreach (var recipe in Model.Recipes)
     {
-        <div class="col">
+        <div class="col col-3">
             <div class="card text-center">
                 <div class="card-header">
                     <h5 class="card-header">
-                        <a asp-page="Detail" 
+                        <a asp-page="Detail"
                        asp-route-id="@recipe.Id" class="link-primary">@recipe.Title</a>
                     </h5>
                     <div class="card-header-pills">
                         <div class="text-center">
                             @foreach (var category in recipe.Categories)
                             {
-                                <span style="font-size:12px; margin-top:5px; margin-right: 5px;" class="badge rounded-pill bg-primary">@category</span>
+                                <a style="text-decoration:none;" asp-page="Index" asp-route-category="@category">
+                                    <span style="font-size:12px; margin-top:5px; margin-right: 5px;" class="badge rounded-pill bg-primary">
+                                        @category
+                                    </span>
+                                </a>
                             }
                         </div>
                     </div>
