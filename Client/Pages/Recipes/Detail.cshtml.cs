@@ -12,7 +12,7 @@ namespace Exercise3.Pages.Recipes
 
         public DetailModel(IHttpClientFactory httpClientFactory) => _httpClientFactory = httpClientFactory;
         
-        public async Task<IActionResult> OnGet(Guid id)
+        public async Task<IActionResult> OnGet(Guid? id)
         {
             var client = _httpClientFactory.CreateClient("Recipes");
             var request = await client.GetFromJsonAsync<Recipe>("recipes/"+id);

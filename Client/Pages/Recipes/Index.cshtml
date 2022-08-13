@@ -11,7 +11,10 @@
         <div class="col">
             <div class="card text-center">
                 <div class="card-header">
-                    <h5 class="card-header">@recipe.Title</h5>
+                    <h5 class="card-header">
+                        <a asp-page="Detail" 
+                       asp-route-id="@recipe.Id" class="link-primary">@recipe.Title</a>
+                    </h5>
                     <div class="card-header-pills">
                         <div class="text-center">
                             @foreach (var category in recipe.Categories)
@@ -21,13 +24,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-footer">
 
+                <div class="card-footer">
                     <div class="btn-group">
-                        <a class="btn btn-primary" asp-page="Detail"
-                       asp-route-id="@recipe.Id">
-                            <i class="bi bi-zoom-in"></i>
-                        </a>
                         <a class="btn btn-secondary" asp-page="Edit"
                        asp-route-id="@recipe.Id">
                             <i class="bi bi-pencil-square"></i>
