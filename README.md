@@ -6,8 +6,9 @@
 - [Bootstrap 5](https://getbootstrap.com/docs/5.0/getting-started/introduction/)
 - [Sweetalert2](https://sweetalert2.github.io/#examples)
 
-## Project structure
-- The proejct is divided into two parts the Server using ASP.NET Core [Minimal API](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-6.0) and the Client using ASP.NET Core [Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-6.0&tabs=visual-studio).
+## Project Overview
+- In this project I learned how to create a minimal web API using Dotnet Core and how to create a client with Dotnet Core Razor Pages.
+- The project is divided into two parts the Server using ASP.NET Core [Minimal API](https://docs.microsoft.com/en-us/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-6.0) and the Client using ASP.NET Core [Razor Pages](https://docs.microsoft.com/en-us/aspnet/core/razor-pages/?view=aspnetcore-6.0&tabs=visual-studio).
 
 ## Functionality
 * List, add, delete and edit recipes.
